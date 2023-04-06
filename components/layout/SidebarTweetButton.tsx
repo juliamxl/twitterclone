@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { FaFeather } from "react-icons/fa";
 
-const SidebarTweetButton = () =>{
+const SidebarTweetButton = () => {
     const router = useRouter();
 
-    return(
+    return (
         <div onClick={() => router.push('/')}>
             <div className="mt-6
             lg:hidden
@@ -20,9 +20,25 @@ const SidebarTweetButton = () =>{
             transition
             cursor-pointer
             ">
-                 <FaFeather size={24} color="white"/>
+                <FaFeather size={24} color="white" />
             </div>
-           
+
+            <div className="
+            mt-6
+            hidden
+            lg:block
+            px-4
+            py-2
+            rounded-full
+            bg-sky-500
+            cursor-pointer
+            transition
+            ">
+                <p className="hidden lg:block text-center font-semibold text-white text-[-20px]">
+                    Tweet
+                </p>
+            </div>
+
         </div>
     );
 }
