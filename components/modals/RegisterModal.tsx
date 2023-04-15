@@ -37,8 +37,20 @@ const RegisterModal = () => {
                 disabled={isLoading}
             />
             <Input
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                disabled={isLoading}
+            />
+            <Input
+                placeholder="Username"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                disabled={isLoading}
+            />
+            <Input
                 placeholder="Password"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 disabled={isLoading}
             />
