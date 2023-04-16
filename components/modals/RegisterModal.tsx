@@ -2,15 +2,26 @@ import useRegisterModal from "@/hooks/useRegisterModal";
 import { useCallback, useState } from "react";
 import Input from "../layout/Input";
 import Modal from "../Modal";
+import useLoginModal from "@/hooks/useLoginModal";
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
 
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    const onToggle = useCallback(() => {
+        if(isLoading){
+            return;
+        }
+
+        registerModal.onClose();
+        loginModal.onOpen();
+    }, [isLoading, registerModal, loginModal])
 
     const onSubmit = useCallback(async () => {
         try {
@@ -26,7 +37,7 @@ const RegisterModal = () => {
             setIsLoading(false)
         }
 
-    }, [RegisterModal]);
+    }, [registerModal]);
 
     const bodyContent = (
         <div className="flex flex-col gap-4">
@@ -44,8 +55,8 @@ const RegisterModal = () => {
             />
             <Input
                 placeholder="Username"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
                 disabled={isLoading}
             />
             <Input
@@ -58,15 +69,25 @@ const RegisterModal = () => {
         </div>
     )
 
+    const footerContent =  (
+        <div className=" text-neutral-400 text-center mt-4">
+            <p>Already have an account?</p>
+            <span onClick={onToggle} className=" text-white cursor-pointer hover:underline">
+                Sign in
+            </span>
+        </div>
+    )
+
     return (
         <Modal
             disabled={isLoading}
             isOpen={registerModal.isOpen}
-            tittle="Login"
-            actionLabel="Sign in"
+            tittle="Create an account"
+            actionLabel="Register"
             onClose={registerModal.onClose}
             onSubmit={onSubmit}
             body={bodyContent}
+            footer={footerContent}
         />
     );
 }
